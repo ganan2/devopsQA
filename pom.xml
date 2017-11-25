@@ -8,7 +8,7 @@
     <version>1.0.7-RELEASE</version>
     <packaging>jar</packaging>
 
-    <name>Spring starter project - Maven</name>
+    <name>Devops QA</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
