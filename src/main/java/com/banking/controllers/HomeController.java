@@ -68,7 +68,9 @@ public class HomeController {
      * @return
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signupPost(@ModelAttribute("user") User user,  Model model) { /** @ModelAttribute Retrieves the values posted and assigns to those in the object in the arguments of the method */
+    public String signupPost(
+            @ModelAttribute("user") User user,
+            Model model) {
         if(userService.checkUserExists(user.getUsername(), user.getEmail()))  {
 
             if (userService.checkEmailExists(user.getEmail())) {

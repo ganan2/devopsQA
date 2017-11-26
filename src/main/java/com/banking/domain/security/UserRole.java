@@ -5,9 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-
-@Entity
-@Table(name="user_role")
 public @Data class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
