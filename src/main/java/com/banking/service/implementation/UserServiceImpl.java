@@ -14,10 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
+
 @Slf4j
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
@@ -90,5 +91,10 @@ public class UserServiceImpl implements UserService{
 
         return false;
     }
+
+    public User saveUser (User user) {
+        return userDao.save(user);
+    }
 }
+
 
