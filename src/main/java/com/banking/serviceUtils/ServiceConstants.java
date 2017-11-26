@@ -1,4 +1,4 @@
-package com.banking.serviceUtils.serviceConstants;
+package com.banking.serviceUtils;
 
 public final class ServiceConstants {
 

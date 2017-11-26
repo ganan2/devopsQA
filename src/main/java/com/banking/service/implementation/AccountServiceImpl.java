@@ -4,6 +4,7 @@ import com.banking.dao.PrimaryAccountDao;
 import com.banking.dao.SavingsAccountDao;
 import com.banking.domain.*;
 import com.banking.service.AccountService;
+import com.banking.service.TransactionService;
 import com.banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.Date;
 
-import static com.banking.serviceUtils.serviceConstants.ServiceConstants.NEXT_ACCOUNT_NUMBER;
+import static com.banking.serviceUtils.ServiceConstants.NEXT_ACCOUNT_NUMBER;
 
 public class AccountServiceImpl implements AccountService{
 
@@ -25,6 +26,9 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     public PrimaryAccount createPrimaryAccount() {
         PrimaryAccount primaryAccount = new PrimaryAccount();
@@ -56,6 +60,7 @@ public class AccountServiceImpl implements AccountService{
 
             PrimaryTransaction primaryTransaction =
                     new PrimaryTransaction(date, "Deposit to primary account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
+            transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
         } else if(accountType.equalsIgnoreCase("savings")){
             SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -65,6 +70,7 @@ public class AccountServiceImpl implements AccountService{
             Date date = new Date();
             SavingsTransaction savingsTransaction =
                     new SavingsTransaction(date, "Deposit to savings account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
+            transactionService.saveSavingsDepositTransaction(savingsTransaction);
         }
     }
 
