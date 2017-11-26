@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.security.SecureRandom;
 
+/** The type Security config */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)

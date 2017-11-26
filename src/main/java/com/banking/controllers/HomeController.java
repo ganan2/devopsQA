@@ -17,9 +17,7 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Should display the welcome message
- */
+/** The type Home controller */
 @Controller
 public class HomeController {
 
@@ -31,6 +29,7 @@ public class HomeController {
 
     /**
      * Should redirect to index
+     *
      * @return
      */
     @RequestMapping(value = "/")
@@ -40,6 +39,7 @@ public class HomeController {
 
     /**
      * Should display index
+     *
      * @return
      */
     @RequestMapping(value = "/index")
@@ -49,6 +49,7 @@ public class HomeController {
 
     /**
      * Should display signup
+     *
      * @return
      */
     @RequestMapping(
@@ -63,6 +64,7 @@ public class HomeController {
 
     /**
      * Should validate username and email for signup
+     *
      * @param user
      * @param model
      * @return
@@ -91,6 +93,13 @@ public class HomeController {
         }
     }
 
+    /**
+     * Should return user front
+     *
+     * @param principal
+     * @param model
+     * @return
+     */
     @RequestMapping("/userFront")
     public String userFront(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());

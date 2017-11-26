@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/** The type User details service implementation */
 @Slf4j
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -16,6 +17,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * Loads user
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);

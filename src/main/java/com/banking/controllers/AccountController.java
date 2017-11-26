@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 import java.util.List;
 
+/** The type Account controller */
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -27,6 +28,13 @@ public class AccountController {
     @Autowired
     TransactionService transactionService;
 
+    /**
+     * This method returns primary account
+     *
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping("/primaryAccount")
     public String primaryAccount(Model model, Principal principal){
 
@@ -42,6 +50,13 @@ public class AccountController {
         return "primaryAccount";
     }
 
+    /**
+     * This method returns savings account
+     *
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping("/savingsAccount")
     public String savingsAccount(Model model, Principal principal){
 
@@ -57,6 +72,12 @@ public class AccountController {
         return "savingsAccount";
     }
 
+    /**
+     * This method accepts deposits
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/deposit", method = RequestMethod.GET)
     public String deposit(Model model){
         model.addAttribute("accountType", "");
@@ -64,6 +85,14 @@ public class AccountController {
         return "deposit";
     }
 
+    /**
+     * This method posts deposit and redirects to user front
+     *
+     * @param amount
+     * @param accountType
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String depositPOST(
             @ModelAttribute("amount") String amount,
@@ -75,6 +104,12 @@ public class AccountController {
         return "redirect:/userFront";
     }
 
+    /**
+     * This method returns withdraw
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
     public String withdraw(Model model){
         model.addAttribute("accountType", "");
@@ -82,6 +117,14 @@ public class AccountController {
         return "withdraw";
     }
 
+    /**
+     * This method posts withdraw and redirects to user front
+     *
+     * @param amount
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
     public String withdrawPost(
             @ModelAttribute("amount") String amount,

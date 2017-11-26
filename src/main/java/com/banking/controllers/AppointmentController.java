@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** The type Appointment controller */
 @Controller
 @RequestMapping("/appointment")
 public class AppointmentController {
@@ -26,6 +27,12 @@ public class AppointmentController {
     @Autowired
     private UserService userService;
 
+    /**
+     * This method returns appointment
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/create",method = RequestMethod.GET)
     public String createAppointment(Model model) {
         Appointment appointment = new Appointment();
@@ -35,6 +42,16 @@ public class AppointmentController {
         return "appointment";
     }
 
+    /**
+     * This method posts appointment and redirects to user front
+     *
+     * @param appointment
+     * @param date
+     * @param model
+     * @param principal
+     * @return
+     * @throws ParseException
+     */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public String createAppointmentPost(
             @ModelAttribute("appointment") Appointment appointment,

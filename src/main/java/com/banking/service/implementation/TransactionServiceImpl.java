@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/** The type Transaction service implementaton */
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
@@ -32,6 +33,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private RecipientDao recipientDao;
 
+    /**
+     * Returns user
+     *
+     * @param username
+     * @return
+     */
     @Override
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
         User user = userService.findByUsername(username);
@@ -39,6 +46,12 @@ public class TransactionServiceImpl implements TransactionService {
         return primaryTransactionList;
     }
 
+    /**
+     * Returns Savings transaction list
+     *
+     * @param username
+     * @return
+     */
     @Override
     public List<SavingsTransaction> findSavingsTransactionList(String username) {
         User user = userService.findByUsername(username);
@@ -46,16 +59,36 @@ public class TransactionServiceImpl implements TransactionService {
         return savingsTransactionList;
     }
 
+    /**
+     * Saves primary transaction
+     *
+     * @param primaryTransaction
+     */
     @Override
     public void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction) {
         primaryTransactionDao.save(primaryTransaction);
     }
 
+    /**
+     * Saves savings transaction
+     *
+     * @param savingsTransaction
+     */
     @Override
     public void saveSavingsDepositTransaction(SavingsTransaction savingsTransaction) {
         savingsTransactionDao.save(savingsTransaction);
     }
 
+    /**
+     * Services transfer between primary account and savings account
+     *
+     * @param transferFrom
+     * @param transferTo
+     * @param amount
+     * @param primaryAccount
+     * @param savingsAccount
+     * @throws Exception
+     */
     public void betweenAccountsTransfer(
             String transferFrom,
             String transferTo,
@@ -106,6 +139,12 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
+    /**
+     * Finds recipient list
+     *
+     * @param principal
+     * @return
+     */
     public List<Recipient> findRecipientList(Principal principal) {
         String username = principal.getName();
         List<Recipient> recipientList = recipientDao.findAll().stream() 			//convert list to stream
@@ -115,14 +154,31 @@ public class TransactionServiceImpl implements TransactionService {
         return recipientList;
     }
 
+    /**
+     * Saves recipient
+     *
+     * @param recipient
+     * @return
+     */
     public Recipient saveRecipient(Recipient recipient) {
         return recipientDao.save(recipient);
     }
 
+    /**
+     * Finds recipient
+     *
+     * @param recipientName
+     * @return
+     */
     public Recipient findRecipientByName(String recipientName) {
         return recipientDao.findByName(recipientName);
     }
 
+    /**
+     * Deletes recipient
+     *
+     * @param recipientName
+     */
     public void deleteRecipientByName(String recipientName) {
         recipientDao.deleteByName(recipientName);
     }

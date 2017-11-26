@@ -9,10 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/** The type Recipient */
 public @Data class Recipient {
 
-    @Id                                             /** Primary Key */
-    @GeneratedValue(strategy = GenerationType.AUTO) /** Auto increment */
+    @Id                                             // Primary Key
+    @GeneratedValue(strategy = GenerationType.AUTO) // Auto increment
     private Long id;
     private String name;
     private String email;
@@ -20,9 +21,9 @@ public @Data class Recipient {
     private String accountNumber;
     private String description;
 
-    @ManyToOne                                      /** Many recipients to one user */
-    @JoinColumn(name = "user_id")                   /** Join column user_id */
-    @JsonIgnore                                     /** Do not show in the response */
+    @ManyToOne                                      // Many recipients to one user
+    @JoinColumn(name = "user_id")                   // Join column user_id
+    @JsonIgnore                                     // Do not show in the response
     private User user;
 
 }

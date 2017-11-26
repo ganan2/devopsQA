@@ -14,6 +14,7 @@ import java.util.Date;
 
 import static com.banking.serviceUtils.ServiceConstants.NEXT_ACCOUNT_NUMBER;
 
+/** The type Account service implementation */
 public class AccountServiceImpl implements AccountService{
 
     private static int nextAccountNumber = NEXT_ACCOUNT_NUMBER;
@@ -30,6 +31,11 @@ public class AccountServiceImpl implements AccountService{
     @Autowired
     private TransactionService transactionService;
 
+    /**
+     * Creates Primary account and returns primary account
+     *
+     * @return
+     */
     public PrimaryAccount createPrimaryAccount() {
         PrimaryAccount primaryAccount = new PrimaryAccount();
         primaryAccount.setAccountBalance(new BigDecimal(0.0));
@@ -39,6 +45,11 @@ public class AccountServiceImpl implements AccountService{
         return primaryAccountDao.findByAccountNumber(primaryAccount.getAccountNumber());
     }
 
+    /**
+     * Creates Savings account and returns savings account
+     *
+     * @return
+     */
     public SavingsAccount createSavingsAccount() {
         SavingsAccount savingsAccount = new SavingsAccount();
         savingsAccount.setAccountBalance(new BigDecimal(0.0));
@@ -48,6 +59,13 @@ public class AccountServiceImpl implements AccountService{
         return savingsAccountDao.findByAccountNumber(savingsAccount.getAccountNumber());
     }
 
+    /**
+     * Services primary deposits and savings deposits
+     *
+     * @param accountType
+     * @param amount
+     * @param principal
+     */
     public void deposit(String accountType, double amount, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
@@ -74,6 +92,13 @@ public class AccountServiceImpl implements AccountService{
         }
     }
 
+    /**
+     * Services withdrawal from primary account and withdrawal from savings account
+     *
+     * @param accountType
+     * @param amount
+     * @param principal
+     */
     public void withdraw(String accountType, double amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         if(accountType.equalsIgnoreCase("primary")){
@@ -97,6 +122,11 @@ public class AccountServiceImpl implements AccountService{
         }
     }
 
+    /**
+     * This method returns next account number
+     *
+     * @return
+     */
     private int accountGen(){
         return ++nextAccountNumber;
     }

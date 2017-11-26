@@ -12,8 +12,8 @@ import java.util.Date;
 
 public @Data class SavingsTransaction {
 
-    @Id                                                 /** Primary key */
-    @GeneratedValue (strategy = GenerationType.AUTO)    /** Auto increment */
+    @Id                                                 // Primary key
+    @GeneratedValue (strategy = GenerationType.AUTO)    // Auto increment
     private Long id;
     private Date date;
     private String description;
@@ -21,8 +21,8 @@ public @Data class SavingsTransaction {
     private String status;
     private double amount;
     private BigDecimal availableBalance;
-    @ManyToOne                                          /** Many savings transactions to one savings account. */
-    @JoinColumn(name ="savings_account_id")             /** Join with the field savings_account_id */
+    @ManyToOne                                          // Many savings transactions to one savings account.
+    @JoinColumn(name ="savings_account_id")             // Join with the field savings_account_id */
     private SavingsAccount savingsAccount;
 
     /**

@@ -10,10 +10,11 @@ import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/** The type Primary transaction */
 public @Data class PrimaryTransaction {
 
-    @Id                                                 /** Primary key */
-    @GeneratedValue(strategy = GenerationType.AUTO)     /** Auto increment */
+    @Id                                                 // Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)     // Auto increment
     private Long id;
     private Date date;
     private String description;
@@ -21,9 +22,9 @@ public @Data class PrimaryTransaction {
     private String status;
     private double amount;
     private BigDecimal availableBalance;
-    @ManyToOne                                          /** Many primary transaction to one primary account. */
-    @JoinColumn(name = "primaryAccount")                /** Primary account is a column in PrimaryTransaction table. Join primary account for each primary transaction.  */
-    private PrimaryAccount primaryAccount;              /** Each primary account section shows primary transactions which includes primaryAccount with each transaction. */
+    @ManyToOne                                          // Many primary transaction to one primary account.
+    @JoinColumn(name = "primaryAccount")                // Primary account is a column in PrimaryTransaction table. Join primary account for each primary transaction.
+    private PrimaryAccount primaryAccount;              // Each primary account section shows primary transactions which includes primaryAccount with each transaction.
 
     /**
      * Instantiates primary transaction

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/** The type Role */
 public @Data class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

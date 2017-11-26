@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/** The type Appointment service implementation */
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -26,6 +27,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.findOne(id);
     }
 
+    /**
+     * This method confirms appointment
+     *
+     * @param id
+     */
     public void confirmAppointment(Long id) {
         Appointment appointment = findAppointment(id);
         appointment.setConfirmed(true);

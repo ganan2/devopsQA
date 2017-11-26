@@ -2,6 +2,7 @@ package com.banking.domain.security;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/** The type Authority */
 public class Authority implements GrantedAuthority {
 
     private final String authority;

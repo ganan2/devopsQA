@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/** The type User role */
 public @Data class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -8,20 +8,27 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+/** The type Savings account */
 public @Data class SavingsAccount {
 
-    @Id                                             /** Primary key */
-    @GeneratedValue(strategy = GenerationType.AUTO) /** Auto increment */
+    @Id                                             // Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // Auto increment
     private Long id;
     private int accountNumber;
     private BigDecimal accountBalance;
-    @OneToMany(                                     /** One savings account to many savings transactions. */
-            mappedBy = "savingsAccnount",           /** savingsAccount is a property of the class SavingsTransaction. */
-            cascade = CascadeType.ALL,              /** The actions on the list will be propagated to the class. */
-            fetch = FetchType.LAZY)                 /** When the class object is created, the values from the list need not be retrieved unless required. */
+    @OneToMany(                                     // One savings account to many savings transactions.
+            mappedBy = "savingsAccnount",           // savingsAccount is a property of the class SavingsTransaction.
+            cascade = CascadeType.ALL,              // The actions on the list will be propagated to the class.
+            fetch = FetchType.LAZY)                 // When the class object is created, the values from the list need not be retrieved unless required.
     @JsonIgnore
     private List<SavingsTransaction> savingsTransationList;
 
+    /**
+     * This method returns account number
+     *
+     * @param accountNumber
+     * @return
+     */
     public int getAccountNumber(int accountNumber) {
         return accountNumber;
     }

@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** The type Request filter */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class RequestFilter implements Filter {

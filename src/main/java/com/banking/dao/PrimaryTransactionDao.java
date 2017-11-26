@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface PrimaryTransactionDao extends PagingAndSortingRepository<PrimaryTransaction, Long> {
 
+    /**
+     * Find all
+     *
+     * @return
+     */
     List<PrimaryTransaction> findAll();
 }

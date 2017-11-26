@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
+/** The type User service implementation */
 @Slf4j
 @Service
 @Transactional
@@ -32,19 +33,43 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * This method saves user
+     *
+     * @param user
+     */
     public void save(User user) {
         userDao.save(user);
     }
 
+    /**
+     * This method finds user by username and returns user
+     *
+     * @param username
+     * @return
+     */
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
+    /**
+     * This method finds user by email and returns user
+     *
+     * @param email
+     * @return
+     */
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
 
 
+    /**
+     * The method creates user and returns user
+     *
+     * @param user
+     * @param userRoles
+     * @return
+     */
     public User createUser(User user, Set<UserRole> userRoles) {
         User localUser = userDao.findByUsername(user.getUsername());
 
@@ -69,6 +94,13 @@ public class UserServiceImpl implements UserService {
         return localUser;
     }
 
+    /**
+     * THis method checks if user exists
+     *
+     * @param username
+     * @param email
+     * @return
+     */
     public boolean checkUserExists(String username, String email){
         if (checkUsernameExists(username) || checkEmailExists(username)) {
             return true;
@@ -77,6 +109,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * This method checks if username exists
+     *
+     * @param username
+     * @return
+     */
     public boolean checkUsernameExists(String username) {
         if (null != findByUsername(username)) {
             return true;
@@ -85,6 +123,12 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /**
+     * This method checks if email exists
+     *
+     * @param email
+     * @return
+     */
     public boolean checkEmailExists(String email) {
         if (null != findByEmail(email)) {
             return true;
@@ -93,20 +137,41 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /**
+     * This method saves user and returns user
+     *
+     * @param user
+     * @return
+     */
     public User saveUser (User user) {
         return userDao.save(user);
     }
 
+    /**
+     * This method finds user list
+     *
+     * @return
+     */
     public List<User> findUserList() {
         return userDao.findAll();
     }
 
+    /**
+     * This method enables user
+     *
+     * @param username
+     */
     public void enableUser (String username) {
         User user = findByUsername(username);
         user.setEnabled(true);
         userDao.save(user);
     }
 
+    /**
+     * This method disables user
+     *
+     * @param username
+     */
     public void disableUser (String username) {
         User user = findByUsername(username);
         user.setEnabled(false);
