@@ -1,10 +1,8 @@
 package com.banking.service;
 
-import com.banking.domain.PrimaryAccount;
-import com.banking.domain.PrimaryTransaction;
-import com.banking.domain.SavingsAccount;
-import com.banking.domain.SavingsTransaction;
+import com.banking.domain.*;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface TransactionService {
@@ -22,5 +20,13 @@ public interface TransactionService {
                                  String amount,
                                  PrimaryAccount primaryAccount,
                                  SavingsAccount savingsAccount) throws Exception;
+
+    List<Recipient> findRecipientList(Principal principal);
+
+    Recipient saveRecipient(Recipient recipient);
+
+    Recipient findRecipientByName(String recipientName);
+
+    void deleteRecipientByName(String recipientName);
 
 }

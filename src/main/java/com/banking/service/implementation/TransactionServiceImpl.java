@@ -1,17 +1,16 @@
 package com.banking.service.implementation;
 
-import com.banking.dao.PrimaryAccountDao;
-import com.banking.dao.PrimaryTransactionDao;
-import com.banking.dao.SavingsAccountDao;
-import com.banking.dao.SavingsTransactionDao;
+import com.banking.dao.*;
 import com.banking.domain.*;
 import com.banking.service.TransactionService;
 import com.banking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionServiceImpl implements TransactionService {
 
@@ -29,6 +28,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private SavingsAccountDao savingsAccountDao;
+
+    @Autowired
+    private RecipientDao recipientDao;
 
     @Override
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
@@ -103,6 +105,28 @@ public class TransactionServiceImpl implements TransactionService {
             throw new Exception("Invalid Transfer");
         }
     }
+
+    public List<Recipient> findRecipientList(Principal principal) {
+        String username = principal.getName();
+        List<Recipient> recipientList = recipientDao.findAll().stream() 			//convert list to stream
+                .filter(recipient -> username.equals(recipient.getUser().getUsername()))	//filters the line, equals to username
+                .collect(Collectors.toList());
+
+        return recipientList;
+    }
+
+    public Recipient saveRecipient(Recipient recipient) {
+        return recipientDao.save(recipient);
+    }
+
+    public Recipient findRecipientByName(String recipientName) {
+        return recipientDao.findByName(recipientName);
+    }
+
+    public void deleteRecipientByName(String recipientName) {
+        recipientDao.deleteByName(recipientName);
+    }
+
 
 
 }
