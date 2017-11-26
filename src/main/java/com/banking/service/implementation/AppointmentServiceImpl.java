@@ -31,3 +31,4 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setConfirmed(true);
         appointmentDao.save(appointment);
     }
+}
