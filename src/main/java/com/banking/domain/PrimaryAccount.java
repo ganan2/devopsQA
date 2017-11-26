@@ -19,4 +19,8 @@ public @Data class PrimaryAccount {
             cascade = CascadeType.ALL,              /** Actions on the list will propagated to the class. */
             fetch = FetchType.LAZY)                 /** When the class object is created, the values from the list need not be retrieved unless required. */
     private List<PrimaryTransaction> primaryTransactionList;
+
+    public int getAccountNumber(int accountNumber) {
+        return accountNumber;
+    }
 }
