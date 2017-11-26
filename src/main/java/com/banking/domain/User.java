@@ -1,13 +1,21 @@
 package com.banking.domain;
 
+import com.banking.domain.security.Authority;
+import com.banking.domain.security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
-public @Data class User {
+public @Data class User implements UserDetails{
 
     @Id                                             /** Primary account */
     @GeneratedValue(strategy = GenerationType.AUTO) /** Auto increment */
@@ -38,4 +46,29 @@ public @Data class User {
             fetch = FetchType.LAZY)                 /** When an object is created, the values from the object need to be retrieved unless required */
     private List<Recipient> recipientList;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
 }
