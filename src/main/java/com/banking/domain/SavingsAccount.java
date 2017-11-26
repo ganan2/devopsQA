@@ -21,4 +21,8 @@ public @Data class SavingsAccount {
             fetch = FetchType.LAZY)                 /** When the class object is created, the values from the list need not be retrieved unless required. */
     @JsonIgnore
     private List<SavingsTransaction> savingsTransationList;
+
+    public int getAccountNumber(int accountNumber) {
+        return accountNumber;
+    }
 }
