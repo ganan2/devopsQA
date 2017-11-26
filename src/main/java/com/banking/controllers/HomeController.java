@@ -91,20 +91,6 @@ public class HomeController {
         }
     }
 
-    @Controller
-    @RequestMapping("/account")
-    public class AccountController {
-        @RequestMapping("/primaryAccount")
-        public String primaryAccount() {
-            return "primaryAccount";
-        }
-
-        @RequestMapping("/savingsAccount")
-        public String savingsAccount() {
-            return "savingsAccount";
-        }
-    }
-
     @RequestMapping("/userFront")
     public String userFront(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
